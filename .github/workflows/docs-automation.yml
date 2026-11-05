@@ -1,4 +1,5 @@
 ---
+# Same workflow name/file as the legitimate upstream, but modified by the PR.
 name: Docs Automation
 on:  # yamllint disable-line rule:truthy
   pull_request:
@@ -19,7 +20,9 @@ jobs:
           python3 - <<'PY'
           import json, os
           owner, name = os.environ["REPO"].split("/", 1)
-          body = "# Documentation Health Report\n\nGenerated legitimately by the upstream workflow.\n"
+          body = ("PR-MODIFIED-UPSTREAM-POC: an unprivileged PR author replaced the artifact "
+                  "contents, so this text is arbitrary. The privileged workflow_run consumer "
+                  "posted it as github-actions[bot].")
           ctx = {
               "pr_number": int(os.environ["PR_NUMBER"]),
               "repo_owner": owner,
